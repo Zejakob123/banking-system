@@ -1,0 +1,25 @@
+version: '3.8'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      # Add any environment variables needed by your application
+      SPRING_PROFILES_ACTIVE: "dev"
+    depends_on:
+      # Add any services your app depends on (like databases)
+      - mysql
+
+  mysql:
+    image: mysql:latest
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: banking_system
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
